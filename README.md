@@ -1,4 +1,4 @@
-# Supraja-insights-earthquake-dashboard
+
 # 🌍 Supraja Insights: Real-Time Global Earthquake Dashboard
 
 ![Dashboard Preview](./assets/dashboard-screenshot.png)
