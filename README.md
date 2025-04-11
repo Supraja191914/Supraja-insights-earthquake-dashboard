@@ -1,6 +1,7 @@
 
 # 🌍 Supraja Insights: Real-Time Global Earthquake Dashboard
 
+!(https://github.com/user-attachments/assets/2177d319-dc84-4f16-9708-45ba4772f2e6)
 
 
 An interactive Power BI dashboard that visualizes real-time global earthquake data using the USGS Earthquake API. Built entirely on free-tier tools, this project showcases my ability to work with real-time data ingestion, transformation, modeling, and visual storytelling using Power BI.
