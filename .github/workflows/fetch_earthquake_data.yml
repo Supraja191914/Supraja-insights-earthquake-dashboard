@@ -1,0 +1,37 @@
+name: Fetch Earthquake Data Hourly
+
+on:
+  schedule:
+    - cron: '0 * * * *'  # Runs every hour
+  workflow_dispatch:
+
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Pull earthquake data from USGS API
+        run: |
+          curl -s https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_day.geojson \
+            | jq -r '
+              ["time","place","mag","longitude","latitude"],
+              (.features[] | [
+                (.properties.time | tostring),
+                .properties.place,
+                (.properties.mag | tostring),
+                (.geometry.coordinates[0] | tostring),
+                (.geometry.coordinates[1] | tostring)
+              ]) 
+              | @csv' > data/latest_earthquakes.csv
+
+      - name: Commit updated data
+        run: |
+          git config --global user.name 'github-actions'
+          git config --global user.email 'github-actions@github.com'
+          git add data/latest_earthquakes.csv
+          git commit -m "Update earthquake data [auto]" || echo "No changes"
+          git push
+
+Add GitHub Action to auto-fetch USGS data hourly
